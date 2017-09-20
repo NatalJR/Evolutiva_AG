@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Collections;
 
 namespace Evolutiva_AG_SharpC{
@@ -19,37 +20,38 @@ namespace Evolutiva_AG_SharpC{
 
         public Cromosome(){
             Size = 512;
+            Fitness = 0;
             Gene1 = new BitArray(256);
             Gene2 = new BitArray(256);
         }
 
         public Cromosome(int size){
             Size = size;
+            Fitness = 0;
             Gene1 = new BitArray(size / 2);
             Gene2 = new BitArray(size / 2);
         }
 
-        public void Initialize(){
-            Random rnd = new Random();
+        public void Initialize(Random rnd){
             for (int i = 0; i < Gene1.Length; i++)
             {
-                Gene1[i] = rnd.Next(0, 100) > 80 ? true : false;
-                Gene2[i] = rnd.Next(0, 100) > 80 ? true : false;
+                Gene1[i] = rnd.Next(100)>=80 ? true : false;
+                Gene2[i] = rnd.Next(100)>=80 ? true : false;
             }
             Evaluate();
         }
 
-        public int Evaluate(){
-            Fitness=0;
+        public void Evaluate(){
+            int fitness=0;
             for (int i = 0; i < Gene1.Count; i++){
                 if (Gene1[i]){
-                    Fitness++;
+                    fitness++;
                 }
                 if (Gene2[i]){
-                    Fitness++;
+                    fitness++;
                 }
             }
-            return Fitness;
+            this.Fitness = fitness;
         }
     }
 }
