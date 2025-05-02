@@ -16,6 +16,7 @@ namespace Evolutiva_AG_SharpC{
         public BitArray Gene1 { get => _gene1; set => _gene1 = value; }
         public BitArray Gene2 { get => _gene2; set => _gene2 = value; }
         public int Fitness { get => _fitness; set => _fitness = value; }
+        public int Test { get;set; }
         public int Size { get => _size; set => _size = value; }
 
         public Cromosome(){
